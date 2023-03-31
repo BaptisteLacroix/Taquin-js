@@ -117,8 +117,6 @@ function solve() {
     }
     goal = goal.substring(0, goal.length - 1);
     // Send the stringInitiale and goal to the server and get the response
-    console.log(stringInitial);
-    console.log(goal);
     let jsonData = {
         stringInitial: JSON.stringify(stringInitial), goal: JSON.stringify(goal), size: JSON.stringify(size)
     }
@@ -137,7 +135,6 @@ function solve() {
             }
             // wait the last case has moved to check if the puzzle is solved
             // await sleep(response.length * 500);
-            console.log(solved);
             if (solved) {
                 victoryScreen();
             }
@@ -196,8 +193,6 @@ function setBoxPosition(game, actualGrid) {
     for (const element of divs) {
         element.addEventListener('click', function () {
             selection(element);
-            console.log("solved : " + solved);
-            console.log("grid : " + grid);
             if (solved) {
                 victoryScreen();
             }
@@ -220,7 +215,6 @@ function init() {
             size: JSON.stringify(size)
         }, success: function (response) {
             grid = response[0].split(' ');
-            console.log(grid);
             // create a copy of the grid
             for (let i = 0; i < grid.length; i++) {
                 defaultGrid[i] = grid[i];
@@ -310,11 +304,9 @@ function selection(div) {
     if (moves === 0) {
         let index = grid.indexOf('0');
         if (index !== -1) {
-            console.log(index)
             grid[index] = '';
         }
     }
-    console.log(grid)
     let emptyBox = document.getElementsByClassName('empty')[0];
     let emptyBoxId = emptyBox.id;
 
@@ -388,7 +380,6 @@ function animation(actualBox, emptyBox) {
 function isSolve() {
     let divs = document.getElementsByClassName('box');
     let isSolved = true;
-    console.log(divs)
     for (let i = 0; i < divs.length; i++) {
         if (i === 0 && divs[i].innerHTML !== "") {
             isSolved = false;
